@@ -110,13 +110,25 @@ namespace ProjectB_test
 
         }
 
-        private void Clo_Click(object sender, EventArgs e)
+      
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Form4 form4 = new Form4();
             form4.Show();
             this.Hide();
         }
 
-      
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string constr = "Data Source=DESKTOP-I2JLDNG\\SQLEXPRESS;Initial Catalog=ProjectB;Integrated Security=True";
+            SqlConnection con = new SqlConnection(constr);
+            con.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Student", con);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            dataGridView1.DataSource = dt;
+            con.Close();
+        }
     }
 }

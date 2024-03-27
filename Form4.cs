@@ -21,21 +21,18 @@ namespace ProjectB_test
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string constr = "Data Source=DESKTOP-HC6LA9F\\SQLEXPRESS;Initial Catalog=ProjectB;Integrated Security=True";
+            string constr = "Data Source=DESKTOP-I2JLDNG\\SQLEXPRESS;Initial Catalog=ProjectB;Integrated Security=True";
             SqlConnection con = new SqlConnection(constr);
             con.Open();
             SqlCommand cmd = new SqlCommand("INSERT INTO Clo (Name, DateCreated, DateUpdated) VALUES (@Name, GETDATE(), GETDATE())", con);
             cmd.Parameters.AddWithValue("@Name", textBox1.Text);
             cmd.ExecuteNonQuery();
-
- 
-
             MessageBox.Show("Successfully inserted!");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string constr = "Data Source=DESKTOP-HC6LA9F\\SQLEXPRESS;Initial Catalog=ProjectB;Integrated Security=True";
+            string constr = "Data Source=DESKTOP-I2JLDNG\\SQLEXPRESS;Initial Catalog=ProjectB;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(constr))
             {
                 con.Open();
@@ -49,7 +46,7 @@ namespace ProjectB_test
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string constr = "Data Source=DESKTOP-HC6LA9F\\SQLEXPRESS;Initial Catalog=ProjectB;Integrated Security=True";
+            string constr = "Data Source=DESKTOP-I2JLDNG\\SQLEXPRESS;Initial Catalog=ProjectB;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(constr))
             {
                 con.Open();
@@ -59,6 +56,18 @@ namespace ProjectB_test
                 MessageBox.Show("Successfully Deleted!");
             }
 
+        }
+
+        private void Form4_Load(object sender, EventArgs e)
+        {
+            string constr = "Data Source=DESKTOP-I2JLDNG\\SQLEXPRESS;Initial Catalog=ProjectB;Integrated Security=True";
+            SqlConnection con = new SqlConnection(constr);
+            con.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Clo", con);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            dataGridView1.DataSource = dt;
+            con.Close();
         }
     }
 }
